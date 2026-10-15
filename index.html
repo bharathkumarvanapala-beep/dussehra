@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#3b1016">
+  <title>Dussehra Invitation</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --maroon: #4a1118;
+      --deep-maroon: #280b10;
+      --gold: #d5a94f;
+      --paper: #fff4dc;
+      --ink: #4a2520;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      overflow-x: clip;
+    }
+
+    body {
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100svh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      place-items: safe center;
+      overflow-x: hidden;
+      padding: 36px 20px;
+      color: #fff4dc;
+      background:
+        radial-gradient(ellipse at 12% 18%, rgb(232 101 38 / 25%), transparent 32%),
+        radial-gradient(ellipse at 85% 25%, rgb(23 121 111 / 22%), transparent 34%),
+        radial-gradient(ellipse at 52% 100%, rgb(179 67 55 / 28%), transparent 48%),
+        linear-gradient(145deg, #180a13, #321014 48%, #10241f);
+      background-size: 140% 140%;
+      animation: festive-sky 18s ease-in-out infinite alternate;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    body::before {
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      background-image: radial-gradient(rgb(255 222 153 / 26%) 0.7px, transparent 0.7px);
+      background-size: 29px 29px;
+      content: "";
+      opacity: 0.3;
+      pointer-events: none;
+      animation: star-glimmer 5s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 8% 75%, rgb(239 169 52 / 12%), transparent 25%),
+        radial-gradient(ellipse at 94% 68%, rgb(42 174 145 / 11%), transparent 27%);
+      content: "";
+      pointer-events: none;
+    }
+
+    .invitation {
+      position: relative;
+      width: min(100%, 1000px);
+      perspective: 1500px;
+      isolation: isolate;
+    }
+
+    .invitation::before {
+      position: absolute;
+      z-index: -1;
+      inset: -12%;
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at 22% 42%, rgb(252 165 53 / 20%), transparent 34%),
+        radial-gradient(ellipse at 80% 57%, rgb(47 185 156 / 18%), transparent 34%),
+        radial-gradient(ellipse at 50% 50%, rgb(185 60 61 / 25%), transparent 62%);
+      filter: blur(22px);
+      content: "";
+      animation: invitation-aura 8s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    .invitation::after {
+      position: absolute;
+      z-index: -1;
+      inset: -19%;
+      background:
+        conic-gradient(from 222deg at 8% 2%, transparent 0deg, rgb(255 199 91 / 28%) 22deg, transparent 54deg),
+        conic-gradient(from 286deg at 92% 1%, transparent 0deg, rgb(93 220 183 / 22%) 26deg, transparent 57deg),
+        radial-gradient(ellipse at 50% 48%, rgb(255 192 92 / 19%), transparent 67%);
+      filter: blur(14px);
+      mix-blend-mode: screen;
+      content: "";
+      animation: spotlight-sweep 12s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    .sparkle-field {
+      position: absolute;
+      z-index: 5;
+      inset: -36px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .sparkle {
+      position: absolute;
+      top: var(--sparkle-y);
+      left: var(--sparkle-x);
+      width: max(12px, var(--sparkle-size));
+      aspect-ratio: 1;
+      transform: rotate(45deg);
+      background: var(--sparkle-color, #ffe29a);
+      clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+      filter: drop-shadow(0 0 8px rgb(255 210 112 / 95%));
+      opacity: 0;
+      animation: glitter-flow var(--sparkle-speed, 4s) ease-in-out var(--sparkle-delay, 0s) infinite;
+    }
+
+    .sparkle::after {
+      position: absolute;
+      inset: 39%;
+      border-radius: 50%;
+      background: #fffdf2;
+      box-shadow: 0 0 7px 3px rgb(255 248 207 / 85%);
+      content: "";
+    }
+
+    .book {
+      position: relative;
+      min-height: 820px;
+      transform-style: preserve-3d;
+      transition: transform 1s cubic-bezier(0.2, 0.72, 0.18, 1);
+    }
+
+    .book::before {
+      position: absolute;
+      z-index: -1;
+      inset: 8px 0 -9px;
+      transform: translateZ(-13px);
+      border: 1px solid #b77b36;
+      border-radius: 9px 15px 15px 9px;
+      background:
+        repeating-linear-gradient(0deg, rgb(112 71 33 / 12%) 0 1px, transparent 1px 5px),
+        linear-gradient(90deg, #d7bd8a, #f8eacb 50%, #d9bf8d);
+      box-shadow: 0 42px 75px rgb(0 0 0 / 48%), 0 8px 18px rgb(0 0 0 / 30%);
+      content: "";
+    }
+
+    .book.is-open {
+      transform:
+        rotateY(calc(-6deg + var(--pointer-tilt-x, 0deg)))
+        rotateX(calc(1deg + var(--pointer-tilt-y, 0deg)));
+      animation: none;
+    }
+
+    .cover,
+    .pages {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      border: 1px solid rgb(243 202 112 / 72%);
+      border-radius: 8px 14px 14px 8px;
+      box-shadow: 0 38px 78px rgb(0 0 0 / 52%), 0 8px 18px rgb(0 0 0 / 26%);
+      backface-visibility: hidden;
+    }
+
+    .cover {
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      padding: 34px;
+      transform: translateZ(5px);
+      transform-origin: left center;
+      background:
+        radial-gradient(ellipse at 50% 45%, rgb(226 119 46 / 38%), transparent 67%),
+        radial-gradient(ellipse at 15% 85%, rgb(15 104 83 / 22%), transparent 44%),
+        repeating-linear-gradient(0deg, rgb(255 255 255 / 2%) 0 1px, transparent 1px 4px),
+        linear-gradient(130deg, #86212c, #4a1018 58%, #331018);
+      transition: transform 1s cubic-bezier(0.2, 0.72, 0.18, 1), visibility 1s;
+    }
+
+    .cover::before,
+    .cover::after {
+      position: absolute;
+      inset: 13px;
+      border: 1px solid rgb(224 181 89 / 78%);
+      border-radius: 4px 10px 10px 4px;
+      content: "";
+      pointer-events: none;
+    }
+
+    .cover::after {
+      inset: 20px;
+      border-color: rgb(224 181 89 / 34%);
+    }
+
+    .cover::before {
+      box-shadow: inset 7px 0 8px rgb(0 0 0 / 28%);
+    }
+
+    .book.is-open .cover {
+      visibility: hidden;
+      transform: translateZ(5px) rotateY(-168deg);
+    }
+
+    .cover-content {
+      position: relative;
+      z-index: 2;
+      width: min(100%, 450px);
+      text-align: center;
+    }
+
+    .ornament {
+      margin: 0 0 15px;
+      color: #f2d78d;
+      font-size: 27px;
+      letter-spacing: 0.35em;
+    }
+
+    .welcome-scene {
+      display: block;
+      width: clamp(160px, 25vw, 260px);
+      max-width: 55%;
+      height: auto;
+      margin: -5px auto 9px;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 1px solid rgb(255 226 161 / 78%);
+      border-radius: 8px;
+      box-shadow: 0 9px 24px rgb(0 0 0 / 32%), 0 0 18px rgb(245 194 91 / 18%);
+      transform: rotate(-1.5deg);
+    }
+
+    .cover-kicker {
+      margin: 0 0 11px;
+      color: #f4d897;
+      font-size: 0.73rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      color: #fff2ce;
+      font-size: clamp(2.5rem, 8vw, 4.8rem);
+      font-weight: 500;
+      line-height: 1.03;
+      text-shadow: 0 3px 0 #8f5429, 0 9px 24px rgb(0 0 0 / 38%);
+    }
+
+    .cover-subtitle {
+      margin: 13px 0 25px;
+      color: #f2d78d;
+      font-size: 1.15rem;
+      font-style: italic;
+    }
+
+    .cover-greeting {
+      margin: 12px 0;
+      color: #ffe8a7;
+      font-family: "Noto Serif Devanagari", "Nirmala UI", Mangal, serif;
+      font-size: 1.1rem;
+    }
+
+    .open-button {
+      position: relative;
+      overflow: hidden;
+      min-height: 48px;
+      padding: 12px 27px;
+      border: 1px solid #ffe4a1;
+      border-radius: 999px;
+      color: #47151a;
+      background: linear-gradient(110deg, #ffedb8, #f2c562 48%, #dc9b39);
+      background-size: 180% 180%;
+      box-shadow: 0 5px 0 #875522, 0 10px 20px rgb(0 0 0 / 30%);
+      cursor: pointer;
+      font: 700 0.92rem Georgia, "Times New Roman", serif;
+      letter-spacing: 0.035em;
+      animation: button-glow 3s ease-in-out infinite;
+      transition: transform 180ms ease, box-shadow 180ms ease, background-position 300ms ease;
+    }
+
+    .open-button:hover {
+      transform: translateY(-2px);
+      background-position: 100% 50%;
+      box-shadow: 0 7px 0 #875522, 0 14px 23px rgb(0 0 0 / 34%);
+    }
+
+    .open-button:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #875522, 0 5px 12px rgb(0 0 0 / 30%);
+    }
+
+    .open-button:focus-visible {
+      outline: 3px solid #fff4dc;
+      outline-offset: 5px;
+    }
+
+    .music-toggle {
+      position: fixed;
+      z-index: 20;
+      right: max(20px, env(safe-area-inset-right));
+      bottom: max(18px, env(safe-area-inset-bottom));
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 16px;
+      border: 1px solid rgb(255 226 161 / 78%);
+      border-radius: 999px;
+      color: #fff3d3;
+      background: linear-gradient(135deg, rgb(75 23 29 / 94%), rgb(30 19 22 / 94%));
+      box-shadow: 0 7px 24px rgb(0 0 0 / 34%), inset 0 0 14px rgb(255 208 112 / 9%);
+      backdrop-filter: blur(12px);
+      cursor: pointer;
+      font: 600 0.84rem Georgia, "Times New Roman", serif;
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .music-toggle[hidden] {
+      display: none;
+    }
+
+    .music-toggle:hover {
+      transform: translateY(-2px);
+      border-color: #fff1bd;
+      box-shadow: 0 10px 28px rgb(0 0 0 / 42%), 0 0 18px rgb(244 192 86 / 20%);
+    }
+
+    .music-toggle:focus-visible {
+      outline: 3px solid #fff4dc;
+      outline-offset: 4px;
+    }
+
+    .music-toggle[aria-pressed="true"] {
+      border-color: #ffe29a;
+      box-shadow: 0 7px 24px rgb(0 0 0 / 34%), 0 0 20px rgb(244 192 86 / 24%);
+    }
+
+    .music-toggle:disabled {
+      cursor: not-allowed;
+      opacity: 0.68;
+    }
+
+    .music-note {
+      display: grid;
+      width: 27px;
+      height: 27px;
+      place-items: center;
+      border: 1px solid rgb(255 224 153 / 62%);
+      border-radius: 50%;
+      color: #ffdf8c;
+      background: rgb(197 125 38 / 19%);
+      font-size: 1rem;
+    }
+
+    .music-status {
+      position: fixed;
+      z-index: 20;
+      right: max(20px, env(safe-area-inset-right));
+      bottom: calc(max(18px, env(safe-area-inset-bottom)) + 58px);
+      max-width: min(320px, calc(100vw - 32px));
+      padding: 9px 13px;
+      border: 1px solid rgb(255 226 161 / 40%);
+      border-radius: 10px;
+      color: #fff3d3;
+      background: rgb(40 16 20 / 94%);
+      box-shadow: 0 7px 20px rgb(0 0 0 / 25%);
+      font: 0.82rem/1.45 Georgia, "Times New Roman", serif;
+    }
+
+    .music-status:empty {
+      display: none;
+    }
+
+    .pages {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      transform: translateZ(-2px);
+      color: var(--ink);
+      background:
+        repeating-linear-gradient(0deg, rgb(111 68 34 / 2%) 0 1px, transparent 1px 5px),
+        radial-gradient(ellipse at 4% 5%, rgb(238 172 57 / 19%), transparent 35%),
+        radial-gradient(ellipse at 96% 94%, rgb(58 133 91 / 13%), transparent 38%),
+        linear-gradient(110deg, #f5e4bd, #fff8e8 48%, #f2dfb5);
+    }
+
+    .book.is-open .pages {
+      box-shadow:
+        0 0 0 1px rgb(255 219 133 / 45%),
+        0 0 32px rgb(255 184 70 / 26%),
+        0 38px 78px rgb(0 0 0 / 52%),
+        0 8px 18px rgb(0 0 0 / 26%);
+    }
+
+    .pages::after {
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at var(--light-x, 50%) var(--light-y, 42%), rgb(255 255 255 / 26%), transparent 34%),
+        linear-gradient(112deg, transparent 35%, rgb(255 255 255 / 16%) 47%, transparent 58%);
+      background-size: auto, 240% 100%;
+      background-position: center, 140% 0;
+      mix-blend-mode: soft-light;
+      content: "";
+      pointer-events: none;
+      animation: page-sheen 11s ease-in-out infinite;
+    }
+
+    .close-button {
+      position: fixed;
+      z-index: 30;
+      top: max(16px, env(safe-area-inset-top));
+      right: max(16px, env(safe-area-inset-right));
+      min-height: 34px;
+      padding: 6px 12px;
+      border: 1px solid rgb(151 93 42 / 40%);
+      border-radius: 999px;
+      color: #733a2b;
+      background: rgb(255 248 228 / 82%);
+      box-shadow: 0 3px 9px rgb(77 45 24 / 12%);
+      cursor: pointer;
+      touch-action: manipulation;
+      pointer-events: auto;
+      font: 600 0.76rem Georgia, "Times New Roman", serif;
+      transition: background 180ms ease, box-shadow 180ms ease;
+    }
+
+    .close-button[hidden] {
+      display: none;
+    }
+
+    .close-button:hover {
+      background: #fffdf4;
+      box-shadow: 0 0 13px rgb(219 166 75 / 38%);
+    }
+
+    .close-button:focus-visible {
+      outline: 3px solid #9c632d;
+      outline-offset: 3px;
+    }
+
+    .pages::before {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 18px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, rgb(97 56 27 / 18%), rgb(255 255 255 / 44%), rgb(97 56 27 / 15%));
+      content: "";
+      pointer-events: none;
+    }
+
+    .page {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(205px, 21vw, 230px) clamp(34px, 5vw, 52px) clamp(34px, 5vw, 52px);
+      text-align: center;
+    }
+
+    .page::after {
+      position: absolute;
+      z-index: 0;
+      inset: 17px;
+      border: 1px solid rgb(177 125 57 / 24%);
+      border-radius: 5px;
+      content: "";
+      pointer-events: none;
+    }
+
+    .page > :not(.page-art) {
+      position: relative;
+      z-index: 1;
+    }
+
+    .portrait-gallery {
+      display: flex;
+      justify-content: center;
+      gap: clamp(12px, 3vw, 30px);
+      margin: 6px auto 17px;
+    }
+
+    .portrait-card {
+      position: relative;
+      width: min(42%, 168px);
+      margin: 0;
+      animation: portrait-float 5s ease-in-out infinite;
+    }
+
+    .portrait-card:nth-child(2) {
+      animation-delay: -2.5s;
+    }
+
+    .portrait-frame {
+      position: relative;
+      display: block;
+      padding: 5px;
+      border: 1px solid #dcad55;
+      background: linear-gradient(145deg, #fff8df, #d8a346 45%, #fff0bd 68%, #b8712b);
+      box-shadow: 0 9px 18px rgb(71 36 19 / 23%), 0 0 0 4px rgb(212 151 51 / 11%);
+      transition: transform 350ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 350ms ease;
+    }
+
+    .portrait-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 2px solid #fff8e8;
+      object-fit: contain;
+    }
+
+    .portrait-glint {
+      position: absolute;
+      inset: 2px;
+      overflow: hidden;
+      background: linear-gradient(112deg, transparent 24%, rgb(255 255 255 / 46%) 43%, transparent 58%);
+      background-size: 230% 100%;
+      background-position: 150% 0;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      animation: portrait-shine 6s ease-in-out infinite;
+    }
+
+    .portrait-card:nth-child(2) .portrait-frame {
+      transform: none;
+    }
+
+    .portrait-card:hover .portrait-frame,
+    .portrait-card:focus-within .portrait-frame {
+      transform: translateY(-5px) scale(1.035);
+      box-shadow: 0 17px 28px rgb(71 36 19 / 30%), 0 0 20px rgb(243 188 80 / 38%);
+    }
+
+    .portrait-card:nth-child(2) .portrait-glint {
+      animation-delay: -3s;
+    }
+
+    .portrait-card figcaption {
+      margin-top: 11px;
+      color: #7b2530;
+      font-size: clamp(0.8rem, 1.7vw, 0.96rem);
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .portrait-card figcaption span {
+      display: block;
+      color: #704436;
+      font-size: 0.82em;
+      font-weight: 500;
+    }
+
+    .page-art {
+      position: absolute;
+      z-index: 1;
+      top: 3px;
+      left: 50%;
+      width: clamp(190px, 21vw, 220px);
+      height: clamp(190px, 21vw, 220px);
+      transform: none;
+      translate: -50% 0;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 8px rgb(130 69 23 / 20%));
+      opacity: 0.96;
+      animation: artwork-float 5s ease-in-out infinite;
+    }
+
+    .page + .page {
+      border-left: 1px solid rgb(123 75 35 / 14%);
+    }
+
+    .page-label {
+      margin: 0 0 10px;
+      color: #966024;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .page h2 {
+      margin: 0 0 16px;
+      color: #79202c;
+      font-size: clamp(1.65rem, 4vw, 2.15rem);
+      font-weight: 600;
+      line-height: 1.15;
+    }
+
+    .page p {
+      margin: 0 auto 13px;
+      max-width: 34ch;
+      font-size: clamp(0.95rem, 2vw, 1.05rem);
+      line-height: 1.75;
+    }
+
+    .page .salutation {
+      color: #865728;
+      font-style: italic;
+    }
+
+    .page-footer {
+      margin: auto auto 0;
+      padding-top: 12px;
+      color: #87552b;
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .page-footer span {
+      display: block;
+    }
+
+    .names {
+      margin-top: 7px;
+      color: #79202c;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.8;
+    }
+
+    .names span {
+      display: block;
+      color: #704436;
+      font-size: 0.9em;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .hindi {
+      font-family: "Noto Serif Devanagari", "Nirmala UI", Mangal, serif;
+    }
+
+    .hindi .page-label {
+      letter-spacing: 0.08em;
+    }
+
+    .page.hindi h2 {
+      font-size: clamp(1.55rem, 3.7vw, 2rem);
+    }
+
+    .page.hindi p {
+      line-height: 1.95;
+    }
+
+    .page:not([hidden]) {
+      animation: page-reveal 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+
+    .page.hindi:not([hidden]) {
+      animation-delay: 120ms;
+    }
+
+    .page[hidden] {
+      display: none;
+    }
+
+    @keyframes festive-sky {
+      from { background-position: 0% 0%; }
+      to { background-position: 100% 100%; }
+    }
+
+    @keyframes star-glimmer {
+      from { opacity: 0.18; }
+      to { opacity: 0.42; }
+    }
+
+    @keyframes invitation-aura {
+      from { opacity: 0.65; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1.04); }
+    }
+
+    @keyframes spotlight-sweep {
+      from { opacity: 0.55; transform: rotate(-3deg) scale(0.98); }
+      to { opacity: 1; transform: rotate(3deg) scale(1.04); }
+    }
+
+    @keyframes page-sheen {
+      0%, 18% { background-position: center, 140% 0; }
+      72%, 100% { background-position: center, -140% 0; }
+    }
+
+    @keyframes glitter-flow {
+      0% { opacity: 0; transform: translate3d(-5px, 18px, 0) rotate(0deg) scale(0.25); }
+      24% { opacity: 0.95; }
+      52% { opacity: 0.38; transform: translate3d(7px, -8px, 0) rotate(90deg) scale(0.82); }
+      76% { opacity: 0.88; }
+      100% { opacity: 0; transform: translate3d(-3px, -28px, 0) rotate(180deg) scale(0.18); }
+    }
+
+    @keyframes portrait-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    @keyframes portrait-shine {
+      0%, 22% { background-position: 150% 0; }
+      55%, 100% { background-position: -120% 0; }
+    }
+
+    @keyframes diya-drift {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    @keyframes button-glow {
+      0%, 100% { box-shadow: 0 5px 0 #875522, 0 10px 20px rgb(0 0 0 / 30%); }
+      50% { box-shadow: 0 5px 0 #875522, 0 10px 26px rgb(246 187 70 / 32%); }
+    }
+
+    @keyframes garland-sway {
+      0%, 100% { translate: -50% 0; }
+      50% { translate: -50% 3px; }
+    }
+
+    @keyframes artwork-float {
+      0%, 100% { translate: -50% 0; }
+      50% { translate: -50% -5px; }
+    }
+
+    @keyframes page-reveal {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 22px 14px;
+      }
+
+      .music-toggle {
+        right: max(12px, env(safe-area-inset-right));
+        bottom: max(12px, env(safe-area-inset-bottom));
+        width: 48px;
+        min-height: 44px;
+        justify-content: center;
+        padding: 7px;
+        font-size: 0.78rem;
+      }
+
+      .music-toggle #music-label {
+        display: none;
+      }
+
+      .music-status {
+        right: max(12px, env(safe-area-inset-right));
+        bottom: calc(max(12px, env(safe-area-inset-bottom)) + 54px);
+      }
+
+      .book {
+        min-height: 0;
+      }
+
+      .book.is-open {
+        transform: none;
+        overflow-x: clip;
+      }
+
+      .cover {
+        position: relative;
+        min-height: 410px;
+        padding: 26px;
+      }
+
+      .book.is-open .cover {
+        position: absolute;
+      }
+
+      .pages {
+        position: relative;
+        grid-template-columns: 1fr;
+      }
+
+      .sparkle-field {
+        inset: 0;
+      }
+
+      .pages::before {
+        top: 50%;
+        right: 0;
+        bottom: auto;
+        left: 0;
+        width: auto;
+        height: 14px;
+        transform: translateY(-50%);
+        background: linear-gradient(180deg, rgb(97 56 27 / 14%), rgb(255 255 255 / 44%), rgb(97 56 27 / 14%));
+      }
+
+      .page {
+        min-height: 310px;
+        padding: 190px 25px 38px;
+      }
+
+      .page-art {
+        width: clamp(170px, 50vw, 195px);
+        height: clamp(170px, 50vw, 195px);
+      }
+
+      .portrait-card {
+        width: min(40%, 156px);
+      }
+
+      .page + .page {
+        border-top: 1px solid rgb(123 75 35 / 14%);
+        border-left: 0;
+      }
+    }
+
+    @media (max-height: 600px) {
+      body {
+        place-items: start center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="invitation">
+    <div class="book" id="invitation-book">
+      <section class="cover" aria-label="Dussehra invitation cover">
+        <div class="cover-content">
+          <p class="ornament" aria-hidden="true">✧ ❋ ✧</p>
+          <img class="welcome-scene" src="assets/welcome-dussehra.png" width="768" height="768" alt="Two women in traditional saris welcome guests with folded hands beside a decorated ceremonial lamp">
+          <p class="cover-kicker">A festival of victory and light</p>
+          <h1>Happy<br>Dussehra</h1>
+          <p class="cover-greeting" lang="hi">शुभ दशहरा</p>
+          <p class="cover-subtitle">With warm regards</p>
+          <button class="open-button" id="open-invitation" type="button" aria-expanded="false" aria-controls="invitation-pages">
+            Open Invitation
+          </button>
+        </div>
+      </section>
+
+      <div class="pages" id="invitation-pages">
+        <section class="page" lang="en" aria-labelledby="english-heading" hidden>
+          <img class="page-art" src="assets/dussehra-greeting.png" alt="" aria-hidden="true">
+          <p class="page-label">With best regards</p>
+          <div class="portrait-gallery" aria-label="The hosts">
+            <figure class="portrait-card">
+              <span class="portrait-frame">
+                <img src="assets/aditya-varma-hd.jpg" width="492" height="544" alt="Portrait of Mr. Aditya Varma garu">
+                <span class="portrait-glint" aria-hidden="true"></span>
+              </span>
+              <figcaption>
+                Mr. Aditya Varma garu, IAS
+                <span>Project Officer, ITDA</span>
+              </figcaption>
+            </figure>
+            <figure class="portrait-card">
+              <span class="portrait-frame">
+                <img src="assets/tirumani-sripuja-hd.jpg" width="448" height="544" alt="Portrait of Mrs. Tirumani Sripuja garu">
+                <span class="portrait-glint" aria-hidden="true"></span>
+              </span>
+              <figcaption>
+                Mrs. Tirumani Sripuja garu, IAS
+                <span>Joint Collector, ASR District</span>
+              </figcaption>
+            </figure>
+          </div>
+          <h2 id="english-heading">Happy Dussehra</h2>
+          <p class="salutation">Respected Sir/Madam,</p>
+          <p>
+            On the auspicious occasion of Dussehra, we respectfully invite you
+            to join us in celebrating the triumph of good over evil. May this
+            festive season bring peace, happiness and prosperity to you and
+            your family.
+          </p>
+          <p class="salutation">With respectful regards,</p>
+          <footer class="page-footer">
+            <span>Arohan, ITDA Paderu</span>
+            <span>V. Bharath Kumar</span>
+          </footer>
+        </section>
+
+        <section class="page hindi" lang="hi" aria-labelledby="hindi-heading" hidden>
+          <img class="page-art" src="assets/dussehra-greeting.png" alt="" aria-hidden="true">
+          <p class="page-label">सादर आमंत्रण</p>
+          <h2 id="hindi-heading">दशहरा की हार्दिक शुभकामनाएँ</h2>
+          <p class="salutation">आदरणीय महोदय/महोदया,</p>
+          <p>
+            दशहरा के पावन अवसर पर, बुराई पर अच्छाई की विजय के इस शुभ पर्व
+            को मनाने के लिए हम आपको सादर आमंत्रित करते हैं।
+          </p>
+          <p>
+            यह पर्व आपके और आपके परिवार के जीवन में सुख, शांति एवं समृद्धि
+            लेकर आए।
+          </p>
+          <p class="salutation">सादर,</p>
+          <p class="names">
+            श्री आदित्य वर्मा जी, आईएएस
+            <span>परियोजना अधिकारी, आईटीडीए</span>
+            श्रीमती तिरुमनी श्रीपूजा जी, आईएएस
+            <span>संयुक्त कलेक्टर, एएसआर जिला</span>
+          </p>
+          <footer class="page-footer" lang="en">
+            <span>Arohan, ITDA Paderu</span>
+            <span>V. Bharath Kumar</span>
+          </footer>
+        </section>
+      </div>
+    </div>
+    <div class="sparkle-field" aria-hidden="true">
+      <span class="sparkle" style="--sparkle-x: 3%; --sparkle-y: 13%; --sparkle-size: 13px; --sparkle-delay: -1s; --sparkle-speed: 4.2s"></span>
+      <span class="sparkle" style="--sparkle-x: 94%; --sparkle-y: 9%; --sparkle-size: 9px; --sparkle-delay: -3.1s; --sparkle-speed: 3.8s; --sparkle-color: #fff4c9"></span>
+      <span class="sparkle" style="--sparkle-x: 98%; --sparkle-y: 28%; --sparkle-size: 15px; --sparkle-delay: -2s; --sparkle-speed: 5s"></span>
+      <span class="sparkle" style="--sparkle-x: 1%; --sparkle-y: 39%; --sparkle-size: 8px; --sparkle-delay: -0.6s; --sparkle-speed: 3.4s; --sparkle-color: #ffc875"></span>
+      <span class="sparkle" style="--sparkle-x: 96%; --sparkle-y: 53%; --sparkle-size: 11px; --sparkle-delay: -4.2s; --sparkle-speed: 4.7s"></span>
+      <span class="sparkle" style="--sparkle-x: 2%; --sparkle-y: 67%; --sparkle-size: 15px; --sparkle-delay: -2.4s; --sparkle-speed: 5.2s; --sparkle-color: #fff4c9"></span>
+      <span class="sparkle" style="--sparkle-x: 98%; --sparkle-y: 81%; --sparkle-size: 8px; --sparkle-delay: -1.5s; --sparkle-speed: 3.7s; --sparkle-color: #ffc875"></span>
+      <span class="sparkle" style="--sparkle-x: 5%; --sparkle-y: 92%; --sparkle-size: 11px; --sparkle-delay: -3.6s; --sparkle-speed: 4.4s"></span>
+      <span class="sparkle" style="--sparkle-x: 86%; --sparkle-y: 3%; --sparkle-size: 7px; --sparkle-delay: -2.8s; --sparkle-speed: 3.9s"></span>
+      <span class="sparkle" style="--sparkle-x: 13%; --sparkle-y: 24%; --sparkle-size: 7px; --sparkle-delay: -4.8s; --sparkle-speed: 5.1s"></span>
+      <span class="sparkle" style="--sparkle-x: 89%; --sparkle-y: 70%; --sparkle-size: 7px; --sparkle-delay: -0.9s; --sparkle-speed: 4.1s; --sparkle-color: #fff4c9"></span>
+      <span class="sparkle" style="--sparkle-x: 10%; --sparkle-y: 81%; --sparkle-size: 8px; --sparkle-delay: -3.3s; --sparkle-speed: 4.8s; --sparkle-color: #ffc875"></span>
+      <span class="sparkle" style="--sparkle-x: 7%; --sparkle-y: 5%; --sparkle-size: 16px; --sparkle-delay: -2.1s; --sparkle-speed: 4.6s; --sparkle-color: #fff4c9"></span>
+      <span class="sparkle" style="--sparkle-x: 91%; --sparkle-y: 17%; --sparkle-size: 14px; --sparkle-delay: -0.4s; --sparkle-speed: 3.6s; --sparkle-color: #ffc875"></span>
+      <span class="sparkle" style="--sparkle-x: 8%; --sparkle-y: 34%; --sparkle-size: 17px; --sparkle-delay: -3.7s; --sparkle-speed: 5.4s"></span>
+      <span class="sparkle" style="--sparkle-x: 92%; --sparkle-y: 43%; --sparkle-size: 15px; --sparkle-delay: -1.8s; --sparkle-speed: 4.3s; --sparkle-color: #fff4c9"></span>
+      <span class="sparkle" style="--sparkle-x: 7%; --sparkle-y: 56%; --sparkle-size: 14px; --sparkle-delay: -4.5s; --sparkle-speed: 5s; --sparkle-color: #ffc875"></span>
+      <span class="sparkle" style="--sparkle-x: 90%; --sparkle-y: 63%; --sparkle-size: 17px; --sparkle-delay: -2.7s; --sparkle-speed: 4.1s"></span>
+      <span class="sparkle" style="--sparkle-x: 8%; --sparkle-y: 75%; --sparkle-size: 15px; --sparkle-delay: -1.2s; --sparkle-speed: 3.8s; --sparkle-color: #fff4c9"></span>
+      <span class="sparkle" style="--sparkle-x: 91%; --sparkle-y: 89%; --sparkle-size: 16px; --sparkle-delay: -3.9s; --sparkle-speed: 4.9s; --sparkle-color: #ffc875"></span>
+      <span class="sparkle" style="--sparkle-x: 94%; --sparkle-y: 98%; --sparkle-size: 13px; --sparkle-delay: -0.7s; --sparkle-speed: 3.5s"></span>
+    </div>
+  </main>
+  <button class="close-button" id="close-invitation" type="button" hidden>Close invitation</button>
+  <button class="music-toggle" id="music-toggle" type="button" aria-label="Play devotional music" aria-pressed="false" aria-describedby="music-status" hidden>
+    <span class="music-note" aria-hidden="true">♫</span>
+    <span id="music-label">Play devotional music</span>
+  </button>
+  <p class="music-status" id="music-status" role="status" aria-live="polite"></p>
+  <audio id="invitation-bgm" preload="auto" loop src="assets/durga-raga-rupak-kulkarni.mp3"></audio>
+  <script>
+    const openButton = document.getElementById("open-invitation");
+    const book = document.getElementById("invitation-book");
+    const pages = document.getElementById("invitation-pages");
+    const invitation = document.querySelector(".invitation");
+    const musicToggle = document.getElementById("music-toggle");
+    const closeButton = document.getElementById("close-invitation");
+    const musicLabel = document.getElementById("music-label");
+    const musicStatus = document.getElementById("music-status");
+    const bgmAudio = document.getElementById("invitation-bgm");
+    const pointerTilt = window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
+    const MUSIC_FADE_IN_MS = 2400;
+    const MUSIC_VOLUME = 0.85;
+    let musicFadeTimer;
+    let closeFadeTimer;
+    let musicFadeInElapsed = 0;
+    let musicFadeInLastTick = 0;
+    let musicPlaying = false;
+
+    function updateMusicControl(playing) {
+      musicPlaying = playing;
+      musicToggle.setAttribute("aria-pressed", String(playing));
+      const label = playing ? "Pause devotional music" : "Play devotional music";
+      musicToggle.setAttribute("aria-label", label);
+      musicLabel.textContent = label;
+      musicToggle.disabled = false;
+    }
+
+    function beginMusicSession() {
+      window.clearInterval(musicFadeTimer);
+      window.clearInterval(closeFadeTimer);
+      musicFadeTimer = undefined;
+      closeFadeTimer = undefined;
+      bgmAudio.loop = true;
+      bgmAudio.currentTime = 0;
+      bgmAudio.volume = 0;
+      musicFadeInElapsed = 0;
+      musicFadeInLastTick = performance.now();
+      musicFadeTimer = window.setInterval(() => {
+        const now = performance.now();
+        if (musicPlaying && !bgmAudio.paused) {
+          musicFadeInElapsed += now - musicFadeInLastTick;
+          bgmAudio.volume = MUSIC_VOLUME * Math.min(1, musicFadeInElapsed / MUSIC_FADE_IN_MS);
+        }
+        musicFadeInLastTick = now;
+
+        if (musicFadeInElapsed >= MUSIC_FADE_IN_MS) {
+          bgmAudio.volume = MUSIC_VOLUME;
+          window.clearInterval(musicFadeTimer);
+          musicFadeTimer = undefined;
+        }
+      }, 40);
+      updateMusicControl(false);
+    }
+
+    async function startMusic() {
+      if (!book.classList.contains("is-open")) {
+        return;
+      }
+
+      try {
+        await bgmAudio.play();
+        if (!book.classList.contains("is-open")) {
+          bgmAudio.pause();
+          return;
+        }
+        updateMusicControl(true);
+        musicStatus.textContent = "";
+      } catch (error) {
+        window.clearInterval(musicFadeTimer);
+        musicFadeTimer = undefined;
+        updateMusicControl(false);
+        musicStatus.textContent = error instanceof Error
+          ? `Devotional music could not be started: ${error.message}`
+          : "Devotional music could not be started.";
+      }
+    }
+
+    function fadeMusicOnClose() {
+      updateMusicControl(false);
+      window.clearInterval(closeFadeTimer);
+      window.clearInterval(musicFadeTimer);
+      closeFadeTimer = undefined;
+      musicFadeTimer = undefined;
+
+      if (bgmAudio.paused) {
+        bgmAudio.currentTime = 0;
+        bgmAudio.volume = MUSIC_VOLUME;
+        return;
+      }
+
+      const startingVolume = bgmAudio.volume;
+      const fadeStartedAt = performance.now();
+      closeFadeTimer = window.setInterval(() => {
+        const progress = Math.min(1, (performance.now() - fadeStartedAt) / 360);
+        bgmAudio.volume = startingVolume * (1 - progress);
+
+        if (progress === 1) {
+          window.clearInterval(closeFadeTimer);
+          closeFadeTimer = undefined;
+          bgmAudio.pause();
+          bgmAudio.currentTime = 0;
+          bgmAudio.volume = MUSIC_VOLUME;
+        }
+      }, 30);
+    }
+
+    bgmAudio.addEventListener("error", () => {
+      window.clearInterval(musicFadeTimer);
+      musicFadeTimer = undefined;
+      updateMusicControl(false);
+      musicStatus.textContent = "The devotional music file could not be loaded.";
+    });
+
+    if (pointerTilt.matches) {
+      invitation.addEventListener("pointermove", (event) => {
+        const bounds = invitation.getBoundingClientRect();
+        const horizontal = Math.min(1, Math.max(0, (event.clientX - bounds.left) / bounds.width));
+        const vertical = Math.min(1, Math.max(0, (event.clientY - bounds.top) / bounds.height));
+
+        book.style.setProperty("--pointer-tilt-x", `${((horizontal - 0.5) * 4).toFixed(2)}deg`);
+        book.style.setProperty("--pointer-tilt-y", `${((0.5 - vertical) * 2.5).toFixed(2)}deg`);
+        pages.style.setProperty("--light-x", `${(horizontal * 100).toFixed(1)}%`);
+        pages.style.setProperty("--light-y", `${(vertical * 100).toFixed(1)}%`);
+      });
+
+      invitation.addEventListener("pointerleave", () => {
+        book.style.removeProperty("--pointer-tilt-x");
+        book.style.removeProperty("--pointer-tilt-y");
+        pages.style.removeProperty("--light-x");
+        pages.style.removeProperty("--light-y");
+      });
+    }
+
+    openButton.addEventListener("click", () => {
+      book.classList.add("is-open");
+      openButton.setAttribute("aria-expanded", "true");
+      openButton.hidden = true;
+      pages.querySelectorAll(".page").forEach((page) => {
+        page.hidden = false;
+      });
+      closeButton.hidden = false;
+      closeButton.focus({ preventScroll: true });
+      musicToggle.hidden = false;
+      musicStatus.textContent = "";
+      window.scrollTo(0, 0);
+      beginMusicSession();
+      void startMusic();
+    });
+
+    musicToggle.addEventListener("click", () => {
+      if (musicPlaying) {
+        bgmAudio.pause();
+        updateMusicControl(false);
+      } else {
+        void startMusic();
+      }
+    });
+
+    closeButton.addEventListener("click", () => {
+      book.classList.remove("is-open");
+      book.style.removeProperty("--pointer-tilt-x");
+      book.style.removeProperty("--pointer-tilt-y");
+      pages.style.removeProperty("--light-x");
+      pages.style.removeProperty("--light-y");
+      pages.querySelectorAll(".page").forEach((page) => {
+        page.hidden = true;
+      });
+      closeButton.hidden = true;
+      openButton.hidden = false;
+      openButton.setAttribute("aria-expanded", "false");
+      musicToggle.hidden = true;
+      musicStatus.textContent = "";
+      fadeMusicOnClose();
+      openButton.focus();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !closeButton.hidden) {
+        closeButton.click();
+      }
+    });
+  </script>
+</body>
+</html>
